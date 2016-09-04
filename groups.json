@@ -1,0 +1,45 @@
+[
+    {
+    "name":"第一组",
+    "remark": "无",
+    "index": 1,
+    "persons":[
+            {
+            "name":"蓝青松",
+            "position":"董事长",
+            "photo":"face.jpg"
+            },
+            {
+            "name":"王瑞",
+            "position":"VLE",
+            "photo":"face.jpg"
+            },
+            {
+            "name":"董旭峰",
+            "position":"VP高级经理",
+            "photo":"face.jpg"
+            }]
+     },
+    {
+    "name": "第二组",
+    "remark": "无",
+    "index": 2,
+    "persons":[
+            {
+            "name":"徐秋华",
+            "position":"总经理",
+            "photo":"face.jpg"
+            },
+            {
+            "name":"胡锫",
+            "position":"VCE",
+            "photo":"face.jpg"
+            },
+            {
+            "name":"康永",
+            "position":"PT副总监",
+            "photo":"face.jpg"
+            }
+            ]
+    }
+ ]

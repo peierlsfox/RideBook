@@ -1,0 +1,18 @@
+"persons":[
+ {
+ "name":"蓝青松",
+ "position":"董事长",
+ "photo":"face.jpg"
+ },
+ {
+ "name":"王瑞",
+ "position":"VLE",
+ "photo":"face.jpg"
+ },
+ {
+ "name":"董旭峰",
+ "position":"VP高级经理",
+ "photo":"face.jpg"
+ }]
+,
+

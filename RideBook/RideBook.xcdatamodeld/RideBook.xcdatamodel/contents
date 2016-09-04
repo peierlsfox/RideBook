@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15F34" minimumToolsVersion="Automatic">
+    <entity name="Attendance" representedClassName=".Attendance" syncable="YES">
+        <attribute name="isAttended" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="remark" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="attendances" inverseEntity="Group" syncable="YES"/>
+        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="attendances" inverseEntity="Person" syncable="YES"/>
+    </entity>
+    <entity name="EvaluateItem" representedClassName=".EvaluateItem" syncable="YES">
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="itemCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mainSection" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="rank" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="remark" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="rideEvent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RideEvent" inverseName="items" inverseEntity="RideEvent" syncable="YES"/>
+        <relationship name="scores" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EvaluateScore" inverseName="evaluateItem" inverseEntity="EvaluateScore" syncable="YES"/>
+    </entity>
+    <entity name="EvaluateScore" representedClassName=".EvaluateScore" syncable="YES">
+        <attribute name="comments" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rank" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="evaluateItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EvaluateItem" inverseName="scores" inverseEntity="EvaluateItem" syncable="YES"/>
+        <relationship name="evaluateScores" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EvaluateScore" inverseName="evaluateScores" inverseEntity="EvaluateScore" syncable="YES"/>
+        <relationship name="issues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Issue" inverseName="evaluateScore" inverseEntity="Issue" syncable="YES"/>
+        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="evaluateRecordes" inverseEntity="Person" syncable="YES"/>
+        <relationship name="rideEvent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RideEvent" inverseName="evaluateScores" inverseEntity="RideEvent" syncable="YES"/>
+        <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="evaluateScores" inverseEntity="Vehicle" syncable="YES"/>
+    </entity>
+    <entity name="Group" representedClassName=".Group" syncable="YES">
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remark" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="attendances" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Attendance" inverseName="group" inverseEntity="Attendance" syncable="YES"/>
+        <relationship name="rideEvent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RideEvent" inverseName="groups" inverseEntity="RideEvent" syncable="YES"/>
+    </entity>
+    <entity name="Issue" representedClassName=".Issue" syncable="YES">
+        <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="openDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="evaluateScore" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EvaluateScore" inverseName="issues" inverseEntity="EvaluateScore" syncable="YES"/>
+        <relationship name="issuer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="issues" inverseEntity="Person" syncable="YES"/>
+        <relationship name="rideEvent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RideEvent" inverseName="issues" inverseEntity="RideEvent" syncable="YES"/>
+        <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="issues" inverseEntity="Vehicle" syncable="YES"/>
+    </entity>
+    <entity name="Person" representedClassName=".Person" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="position" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="attendances" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Attendance" inverseName="person" inverseEntity="Attendance" syncable="YES"/>
+        <relationship name="evaluateRecordes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EvaluateScore" inverseName="person" inverseEntity="EvaluateScore" syncable="YES"/>
+        <relationship name="issues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Issue" inverseName="issuer" inverseEntity="Issue" syncable="YES"/>
+    </entity>
+    <entity name="RideEvent" representedClassName=".RideEvent" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="project" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remark" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="evaluateScores" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="EvaluateScore" inverseName="rideEvent" inverseEntity="EvaluateScore" syncable="YES"/>
+        <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Group" inverseName="rideEvent" inverseEntity="Group" syncable="YES"/>
+        <relationship name="issues" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Issue" inverseName="rideEvent" inverseEntity="Issue" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="EvaluateItem" inverseName="rideEvent" inverseEntity="EvaluateItem" syncable="YES"/>
+        <relationship name="vehicles" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Vehicle" inverseName="rideEvents" inverseEntity="Vehicle" syncable="YES"/>
+    </entity>
+    <entity name="RidePad" syncable="YES">
+        <attribute name="connectStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dataTransStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="macAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="registerDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="registerID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="rideEvent" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RideEvent" syncable="YES"/>
+    </entity>
+    <entity name="Vehicle" representedClassName=".Vehicle" syncable="YES">
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dimension" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="powerTrain" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="project" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="suspension" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="evaluateScores" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EvaluateScore" inverseName="vehicle" inverseEntity="EvaluateScore" syncable="YES"/>
+        <relationship name="issues" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Issue" inverseName="vehicle" inverseEntity="Issue" syncable="YES"/>
+        <relationship name="rideEvents" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="RideEvent" inverseName="vehicles" inverseEntity="RideEvent" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Attendance" positionX="-270" positionY="-126" width="128" height="103"/>
+        <element name="EvaluateItem" positionX="-596" positionY="-313" width="128" height="178"/>
+        <element name="EvaluateScore" positionX="-668" positionY="-108" width="128" height="163"/>
+        <element name="Group" positionX="-227" positionY="-279" width="128" height="120"/>
+        <element name="Issue" positionX="-621" positionY="89" width="128" height="163"/>
+        <element name="Person" positionX="-272" positionY="0" width="128" height="133"/>
+        <element name="RideEvent" positionX="-414" positionY="-373" width="128" height="193"/>
+        <element name="Vehicle" positionX="-441" positionY="-126" width="128" height="208"/>
+        <element name="RidePad" positionX="-128" positionY="-126" width="128" height="193"/>
+    </elements>
+</model>
