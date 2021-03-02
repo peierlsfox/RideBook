@@ -1,30 +1,20 @@
+from FormMember import FormMember
+from FormTeam import FormTeam
+from os import name
+from DataBase import DataBase
+from Models import Magic, Hero, Book
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5 import QtCore, QtGui, QtWidgets
-from Ui.Ui_tryout import Ui_MainWindow
-from PyQt5.QtCore import QStringListModel,QAbstractListModel,QModelIndex,QSize
-from PyQt5.QtGui import QStandardItemModel,QStandardItem
+from PyQt5.QtWidgets import QApplication,QMainWindow
 
-class MyWindow(QMainWindow, Ui_MainWindow):
-    def __init__(self, parent = None):
-        super(MyWindow, self).__init__(parent)
-        self.setupUi(self)
+db = DataBase()
+# for magic in db.magics:
+#     print('{}:{}'.format(magic.name,magic.grade))
+# for hero in db.heros:
+#     print('{}:{}'.format(hero.name,hero.grade))
 
-    def setupUi(self,MainWindow):
-        super(MyWindow, self).setupUi(self)
-        # self.widget = MyItem(self.scrollAreaWidgetContents)
-        # self.widget_2= MyItem(self.scrollAreaWidgetContents)
-        # for i in range(1,10):
-        #     self.item1 = MyItem(self.scrollAreaWidgetContents)
-        #     self.item1.setObjectName('item{}'.format(i))
-        #     self.verticalLayout.addWidget(self.item1)
+app = QApplication(sys.argv)
+mainWindow = QMainWindow()
+ui = FormTeam(mainWindow)
+mainWindow.show()
+sys.exit(app.exec_())
 
-    def clickSuccess(self):
-        print("Down!")
-
-
-if __name__ == '__main__':  
-    app = QApplication(sys.argv)
-    myWin = MyWindow()
-    myWin.show()
-    sys.exit(app.exec_())
