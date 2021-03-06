@@ -1,10 +1,22 @@
 import xlrd
+import threading
+
 from Models.Hero import Hero
 from Models.Magic import Magic
 from Models.Team import Team
 from Models.Member import Member
 
+
 class DataBase():
+    _instance_lock = threading.Lock()
+
+    def __new__(cls):
+        if not hasattr(DataBase, '_instance'):
+            with DataBase._instance_lock:
+                if not hasattr(DataBase,'_instance'):
+                    DataBase._instance = object.__new__(cls)
+        return DataBase._instance
+
     def __init__(self, dataFile = 'sandata.xls'):
         self.heros = []
         self.magics = []
