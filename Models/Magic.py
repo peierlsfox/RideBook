@@ -4,7 +4,7 @@ class Magic():
 
     def setProperties(self, type,grade,desc,func,sourceHero,sourceType,learnAmount,learnHeros):
         self.type = type
-        self.grade = type
+        self.grade = grade
         self.description = desc
         self.func = func
         self.sourceHero = sourceHero

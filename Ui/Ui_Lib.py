@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\Documents\My Code\python\SanTools\DesignerFile\Lib.ui'
+# Form implementation generated from reading ui file 'c:\Users\hupei\Documents\GitHub\SanTools\DesignerFile\Lib.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.2
 #
@@ -34,8 +34,16 @@ class Ui_FormLib(object):
         self.lineEditFilter.setObjectName("lineEditFilter")
         self.horizontalLayout.addWidget(self.lineEditFilter)
         self.verticalLayout.addLayout(self.horizontalLayout)
-        self.tableViewLib = QtWidgets.QTableView(FormLib)
+        self.tableViewLib = DragableTableView(FormLib)
+        self.tableViewLib.setDragEnabled(True)
+        self.tableViewLib.setDragDropMode(QtWidgets.QAbstractItemView.DragDrop)
+        self.tableViewLib.setAlternatingRowColors(True)
+        self.tableViewLib.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.tableViewLib.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.tableViewLib.setSortingEnabled(True)
         self.tableViewLib.setObjectName("tableViewLib")
+        self.tableViewLib.horizontalHeader().setSortIndicatorShown(True)
+        self.tableViewLib.horizontalHeader().setStretchLastSection(True)
         self.verticalLayout.addWidget(self.tableViewLib)
         self.verticalLayout_2.addLayout(self.verticalLayout)
 
@@ -47,3 +55,4 @@ class Ui_FormLib(object):
         FormLib.setWindowTitle(_translate("FormLib", "Form"))
         self.labelLibName.setText(_translate("FormLib", "库名称"))
         self.lineEditFilter.setPlaceholderText(_translate("FormLib", "搜索"))
+from Components import DragableTableView
