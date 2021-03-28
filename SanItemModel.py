@@ -45,3 +45,13 @@ class SanItemModel(QAbstractTableModel):
         if orientation == Qt.Horizontal:
             return self.headers[section]
         return int(section +1)
+
+    
+    def flags(self, index):
+        return Qt.ItemIsEditable | Qt.ItemIsEnabled | Qt.ItemIsSelectable | Qt.ItemIsDragEnabled | Qt.ItemIsDropEnabled
+    
+    def supportedDropActions(self):
+        return Qt.CopyAction | Qt.MoveAction
+
+    def supportedDragActions(self):
+        return Qt.CopyAction | Qt.MoveAction 

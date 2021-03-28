@@ -53,6 +53,7 @@ class DragableTableView(QTableView):
     def __init__(self, parent = None, type = 'hero'):
         super().__init__(parent)
         self.setType(type)
+        self.setAcceptDrops(True)
         
     def mouseMoveEvent(self, e: QtGui.QMouseEvent) -> None:
         if e.buttons() != Qt.LeftButton:
@@ -65,7 +66,6 @@ class DragableTableView(QTableView):
         height = self.rowHeight(row)
         pixmap = QPixmap(width,height)
         painter = QPainter(pixmap)
-        painter.begin(self)
         painter.fillRect(pixmap.rect(),QColor(230,230,230))
         painter.drawRect(0,0,width-1,height-1)
         painter.drawText(pixmap.rect(),Qt.AlignCenter,text)
@@ -77,7 +77,17 @@ class DragableTableView(QTableView):
         drag.setMimeData(mimeData)
         drag.setPixmap(pixmap)
         drag.exec_(Qt.MoveAction)
-        return super().mouseMoveEvent(e)
+
+    def dragEnterEvent(self, e: QtGui.QDragEnterEvent) -> None:
+        txt = e.mimeData().text()
+        type,address,content = txt.split(':')
+        if type == self.type:
+            print('{} and {}'.format(txt,self.type))
+            e.accept()
+            
+    def dropEvent(self, e: QtGui.QDropEvent) -> None:
+        print(e.mimeData().text(),end='->')
+        print('{}:{}:{}'.format(self.type,self.objectName(),'lib'))
 
     def setType(self, type):
         self.type = type
