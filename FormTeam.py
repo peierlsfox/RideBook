@@ -1,28 +1,26 @@
 from PyQt5.QtWidgets import QWidget
 from Ui.Ui_Team import Ui_FormTeam
 from FormMember import FormMember
-from Models.Hero import Hero
-from Models.Magic import Magic
-from Models.Team import Team
-from Models.Member import Member
+from Models import *
 
 class FormTeam(QWidget,Ui_FormTeam):
-    def __init__(self, parent = None, team:Team = None):
-        super().__init__(parent)
-        super().setupUi(self)
-        self.setTeam(team)
-    
-    def updateUi(self):
-        self.labelTeamNo.setText(self.team.name)
-        self.lineEditTeamDesc.setText(self.team.description)
-        self.comboBoxType.setCurrentText(self.team.type)
-       
-    def setTeam(self, team):
-        self.team = team
-        self.widgetMember1.setMember(self.team.members[0])
-        self.widgetMember1.setAddress('{}.{}'.format(self.team.name,1))
-        self.widgetMember2.setMember(self.team.members[1])
-        self.widgetMember2.setAddress('{}.{}'.format(self.team.name,2))
-        self.widgetMember3.setMember(self.team.members[2])
-        self.widgetMember3.setAddress('{}.{}'.format(self.team.name,3))
-        self.updateUi()
+    def __init__(self, withinView) -> None:
+        super().__init__(withinView)
+        self.setupUi(self)
+        self.member1.setPosition('主')
+        self.member2.setPosition('副')
+        self.member3.setPosition('副')
+
+    def setTeamNo(self,teamNo):
+        self.labelTeamNo.setText('第{}队'.format(teamNo))
+        self.member1.setAddress('{}.{}'.format(teamNo,1))
+        self.member2.setAddress('{}.{}'.format(teamNo,2))
+        self.member3.setAddress('{}.{}'.format(teamNo,3))
+
+    def setTeam(self, team:Team):
+        if team:
+            self.setTeamNo(team.id)
+            # self.comboBoxType.setText(team.type)
+            self.member1.setMember(team.member1)
+            self.member2.setMember(team.member2)
+            self.member3.setMember(team.member3)
