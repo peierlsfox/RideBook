@@ -7,7 +7,7 @@ class DataBase():
     #创建单例时用的线程锁
     _instance_lock = threading.Lock()
 
-    def __init__(self, file='data.xlsx') -> None:
+    def __init__(self, file='data.xls') -> None:
         self.heros = []
         self.members = []
         self.magics = []
