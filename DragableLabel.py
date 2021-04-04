@@ -58,7 +58,7 @@ class DragableLabel(QLabel):
         txt = e.mimeData().text()
         type, addr, content = txt.split(':')
         if self.server:
-            self.server.change(addr,content,self.address,self.text())
+            self.server.change(type,addr,content,self.address,self.text())
         # print('drop from {}:{} to {}'.format(addr,content,self.address))
         self.setFrameStyle(1)
 

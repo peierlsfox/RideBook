@@ -90,7 +90,7 @@ class DataBase():
         member2 = self.loadMember(index,2)
         member3 = self.loadMember(index,3)
         type = self.teamSheet.cell(index,1).value
-        team = Team(index-1,type,member1,member2,member3)
+        team = Team('{}'.format(index-1),type,member1,member2,member3)
         return team
 
     def loadMember(self, index, position) -> Member:
@@ -136,6 +136,11 @@ class DataBase():
             dataRow = hero.exportRow()
             datas.append(dataRow)
         return Hero.exportHeader,datas
+    
+    def Hero2Lib(self, member):
+        if member.magic2:
+            member.magic2.setIsAttach(False)
+            member.setMagic2()
 
 def createDB(arg):
     obj = DataBase()

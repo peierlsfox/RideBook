@@ -16,7 +16,7 @@ class MyWindow(QMainWindow,Ui_MainWindow):
         for i in range(1,11):
             self.widgetTeam = FormTeam(self.scrollAreaWidgetContentsTeams)
             self.widgetTeam.setObjectName('widgetTeam{}'.format(i))
-            self.widgetTeam.setTeam(db.getTeamById(i))
+            self.widgetTeam.setTeam(db.getTeamById(str(i)))
             self.verticalLayoutTeams.addWidget(self.widgetTeam, 0, QtCore.Qt.AlignTop)
         self.widgetHeros.labelItemsName.setText('武将库')
         self.widgetMagics.labelItemsName.setText('战法库')
@@ -25,13 +25,13 @@ class MyWindow(QMainWindow,Ui_MainWindow):
         HeroTableModel = SanObjTable(headers,datas)
         self.widgetHeros.tableViewItems.setModel(HeroTableModel)
         self.widgetHeros.tableViewItems.setType(SanHelp.HeroType)
-        self.widgetHeros.tableViewItems.setAddress('LibHero')
+        self.widgetHeros.tableViewItems.setAddress('{}{}'.format(SanHelp.LibAddress,SanHelp.HeroType))
 
         headers, datas = db.exportMagicsToTable()
         MagicTableModel = SanObjTable(headers,datas)
         self.widgetMagics.tableViewItems.setModel(MagicTableModel)
         self.widgetMagics.tableViewItems.setType(SanHelp.MagicType)
-        self.widgetMagics.tableViewItems.setAddress('LibMagic')
+        self.widgetMagics.tableViewItems.setAddress('{}{}'.format(SanHelp.LibAddress,SanHelp.MagicType))
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
